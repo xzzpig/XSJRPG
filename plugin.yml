@@ -1,0 +1,71 @@
+name: XSJRPG
+main: com.github.xzzpig.xsjrpg.Main
+version: 0.1
+author: Mg_P
+commands:
+  xsjrpg:
+    description: 新世纪RPG的命令帮助
+    usage: §6[新世纪RPG]§2查看新世纪RPG帮助:/xsj help
+    aliases: [xsj]
+premission: 
+  xsjrpg.*:
+    description: 新世纪RPG的所有权限
+    default: op
+    children:
+      xsjrpg.admin.*: true
+  xsjrpg.admin.*:
+    description: 新世纪RPG的管理员权限
+    default: op
+    children:
+      xsjrpg.default: true
+      xsjrpg.command.*: true
+      xsjrpg.admin.level: true
+      xsjrpg.afmin.drop: true
+  xsjrpg.admin.level:
+    description: 忽视物品level限制
+    default: op
+  xsjrpg.admin.drop:
+    description: 忽视物品禁止丢弃限制
+    default: op
+  xsjrpg.default:
+    description: 新世纪RPG的基础权限(默认没有)
+    default: op
+    children:
+      xsjrpg.command.default: true
+  xsjrpg.command.*:
+    description: 新世纪RPG的所有命令权限
+    default: op
+    children:
+      xsjrpg.command.admin: true
+  xsjrpg.command.admin:
+    description: 新世纪RPG的
+    default: op
+    children:
+      xsjrpg.command.default:true
+      xsjrpg.command.mx: true
+      xsjrpg.command.lore: true
+  xsjrpg.command.default:
+    description: 新世纪RPG的
+    default: op
+    children:
+      xsjrpg.command.help: true
+      xsjrpg.command.ljt: true
+      xsjrpg.command.item: true
+  xsjrpg.command.help:
+    description: 新世纪RPG的help权限
+    default: op
+  xsjrpg.command.mz:
+    description: 修改物品名字权限
+    default: op
+  xsjrpg.command.lore:
+    description: 修改物品lore权限
+    default: op
+  xsjrpg.command.ljt:
+    description: 打开垃圾桶权限
+    default: op
+  xsjrpg.command.item:
+    description: 保存&提取物品权限
+    default: op
+  xsjrpg.type.*:
+    description: 拥有所有type
+    default: op

@@ -1,0 +1,205 @@
+插件效果：
+[物品lore]
+	攻击力增加XX%
+	+150% Damagex 攻击力翻150%[1.5倍]
+
+回血速度增加XX%
++50% Regen 恢复速度增加50%
+
+	XX%攻击秒杀
+	+1% Damages 1%秒杀对象
+
+武器耐久XXs回复1点
++5s ItemHeal 5秒恢复1点耐久
+
+	伤害
+	+2-20 Damage 表示2~20的伤害范围
+
+	生命值
+	+50 Health  额外增加50点生命
+
+	攻击速度
+	+2 DamageSpeed 增加2点攻击速度(也就是攻击频率)
+
+	闪避
+	+5% Evasion 增加玩家5%的闪避几率（玩家初始几率为0）
+
+	暴击几率及额外伤害
+	+5% CriticalChance +10 CriticalDamage
+ 	5%的几率造成额外10点伤害
+
+	生命偷取
+	+1 LifeSteal (没有上限)
+
+	增加防御
+	+10 Armor 减少10点伤害！！
+
+	使用需求等级
+	Lv 5  使用者至少5级才能使用！
+
+	职业
+	Type:XXXX   -这个要用权限组
+
+	权限lore：
+	在武器上 加入这条属性
+	Type: ZhanShi
+	那么这个装备只有拥有一下权限才能用。
+	给玩家添加这个权限， 那么他就可以用了。
+	xjsrpg.type.ZhanShi
+
+{特殊效果Lore}
+	攻击带有爆炸<音效和效果>
+	BOOM
+	攻击XX几率带有闪电<音效>
+	+XX% Lightning
+
+
+
+
+
+[指令类]指令类最大权限[xsjrpg.*]
+
+	打开垃圾桶
+	/ljt
+	禁止丢弃物品
+
+禁止XX插件在XX世界加载
+/xsj BanPlugin lore[插件名字直接从放置插件的文件夹内读取] World[世界名字]
+xsjrpg.Plugin
+	修改手中武器名字
+	/xsj mz XXX[名字,支持颜色代码]
+	xsjrpg.command.mz
+
+	添加lore
+	/xsj lore add XXXX[要添加的lore] XXXX[第几行]
+	xsjrpg.command.lore
+
+	删除lore
+	/xsj lore del XXXX[第几行]
+	xsjrpg.command.lore
+
+	保存这个武器到文件夹
+	/xsj item save [uid]
+	xsjrpg.item
+	提取这武器到背包
+	/xsj item get [uid]
+	xsjrpg.lore
+{等级监控}
+
+意外掉级
+/xsj lp back
+
+添加玩家等级[Ess插件添加的话不会被记录,上次试过了]
+/xsj lp xp XXXX[数值]或XXL[等级]  SSSS[玩家名字]
+xsjrpg.xp
+
+无视武器等级限制
+/xsj lp lv XXXX[玩家名字] XXXX[时间,单位小时]
+让某玩家在规定时间内无视武器等级限制
+
+
+	让某玩家永久无视等级限制
+	xsjrpg.admin.level
+
+{分世界PvP开放}
+
+禁止/开启pvp(指令使用后提示<世界名字 PVP t>/<世界名字 PVP f>颜色白色,OP可见,禁止时玩家互相攻击会提示<PVP NO>颜色红色,玩家自己可见)
+/xsj PvP World[世界名字] F/T[关闭/开启]
+xsjrpg.PvP
+
+某区块PVP开启[木铲子]
+/xsj PvP QK[某区块(木铲子左右键范围)] F/T[关闭/开启]
+xsjrpg.PvP
+
+{结伴系统}(结伴以后不能解除，且,只能结伴一次)
+结伴
+/j XXXX[玩家名字]
+xsjrpg.j
+
+同意/不同意结伴
+/j y/n
+
+tp结伴队友
+/jtp
+
+同意tp或不同意tp
+/jtp y/n
+
+查看已结伴玩家
+/j list
+
+1.结伴玩家双方攻击力增加10%
+2.结伴玩家双方血量加成增加50%
+3.玩家头顶上的名字变为:
+比如结伴玩家是1,同意结伴玩家是2
+那么1玩家头顶的名字变为2&1
+聊天框的名字不变
+
+{世界限制}
+/xsj x World[世界名字] XXXX[等级限制]
+xsjrpg.world
+
+
+	查看插件所有指令:
+	/xsj help
+查看所有有属性的lore:
+/xsj lore
+
+
+
+命令&权限
+commands:
+  xsjrpg:
+    description: 新世纪RPG的命令帮助
+    usage: §6[新世纪RPG]§2查看新世纪RPG帮助:/xsj help
+    aliases: [xsj]
+premission: 
+  xsjrpg.*:
+    description: 新世纪RPG的所有权限
+    default: op
+    children:
+      xsjrpg.admin.*: true
+  xsjrpg.admin.*:
+    description: 新世纪RPG的管理员权限
+    default: op
+    children:
+      xsjrpg.default: true
+      xsjrpg.command.*: true
+      xsjrpg.admin.level: true
+  xsjrpg.admin.level:
+    description: 忽视物品level限制
+    default: op
+  xsjrpg.default:
+    description: 新世纪RPG的基础权限(默认没有)
+    default: op
+    children:
+      xsjrpg.command.default: true
+  xsjrpg.command.*:
+    description: 新世纪RPG的所有命令权限
+    default: op
+    children:
+      xsjrpg.command.admin: true
+  xsjrpg.command.admin:
+    description: 新世纪RPG的
+    default: op
+    children:
+      xsjrpg.command.default:true
+      xsjrpg.command.mx: true
+      xsjrpg.command.lore: true
+  xsjrpg.command.default:
+    description: 新世纪RPG的
+    default: op
+    children:
+      xsjrpg.command.help: true
+  xsjrpg.command.help:
+    description: 新世纪RPG的help权限
+    default: op
+  xsjrpg.command.mz:
+    description: 修改物品名字权限
+    default: op
+  xsjrpg.command.lore:
+    description: 修改物品lore权限
+    default: op
+  xsjrpg.type.*:
+    description: 拥有所有type
+    default: op
