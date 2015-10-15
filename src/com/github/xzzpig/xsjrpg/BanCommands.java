@@ -12,9 +12,11 @@ public class BanCommands implements Listener
 	{
 		Player player = event.getPlayer();
 		String world = player.getWorld().getName();
-		System.out.println("已监听命令事件，命令为"+ event.getMessage().split("")[0]);
-		if(TConfig.getConfigFile("XSJRPG","bancommand.yml").getStringList(world).contains(event.getMessage().split("")[0]))
+		if(TConfig.getConfigFile("XSJRPG","bancommand.yml").getStringList(world).contains(event.getMessage().split(" ")[0].replaceAll("/", "")))
 		{
+			System.out.println(TString.Prefix("新世纪RPG",4)+player.getName()+"在世界"+world+"使用了被禁止命令"+event.getMessage().split(" ")[0].replaceAll("/", ""));
+			if(player.hasPermission("xsjrpg.admin.bancommand"))
+				return;
 			event.setCancelled(true);
 			player.sendMessage(TString.Prefix("新世纪RPG",4)+"你无法在该世界执行该命令");
 		}

@@ -4,7 +4,6 @@ import com.github.xzzpig.BukkitTools.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
-import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 import java.util.*;
@@ -150,7 +149,7 @@ public class Commands
 					sender.sendMessage(TString.Prefix("新世纪RPG",4)+"错误:该玩家未在线");
 					return true;
 				}
-				p.addAttachment(Bukkit.getPluginManager().getPlugin("XSJRPG"),premission,true,time*60*20);
+				p.addAttachment(Bukkit.getPluginManager().getPlugin("XSJRPG"),premission,true,time*20*60);
 				sender.sendMessage(TString.Prefix("新世纪RPG",4)+"已设置"+toplayer+"在"+time+"分钟内拥有权限"+premission);
 			}
 		}
