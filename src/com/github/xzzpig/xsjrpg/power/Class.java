@@ -1,9 +1,13 @@
 package com.github.xzzpig.xsjrpg.power;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
+
 import java.util.*;
+
 import com.github.xzzpig.BukkitTools.*;
+
 import org.bukkit.event.entity.*;
 
 public class Class
@@ -15,8 +19,13 @@ public class Class
 			return true;
 		}
 		String type = "";
+		if(is == null||is.getType() == Material.AIR)
+			return true;
 		ItemMeta im = is.getItemMeta();
 		List<String> lore = im.getLore();
+		if(lore == null){
+			return true;
+		}
 		for(String arg:lore)
 		{
 			if(arg.startsWith("Type"))

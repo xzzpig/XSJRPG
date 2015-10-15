@@ -11,6 +11,8 @@ public class Main extends JavaPlugin{
 		getLogger().info(getName()+"已加载");
 		saveDefaultConfig();
 		getServer().getPluginManager().registerEvents(new PowerListener(), this);
+		getServer().getPluginManager().registerEvents(new BanCommands(), this);
+		getServer().getPluginManager().registerEvents(new LevelLimit(), this);
 	}
 	
 	@Override

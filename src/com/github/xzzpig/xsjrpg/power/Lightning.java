@@ -1,7 +1,10 @@
 package com.github.xzzpig.xsjrpg.power;
 
 import com.github.xzzpig.BukkitTools.*;
+
 import java.util.*;
+
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.*;
@@ -13,8 +16,13 @@ public class Lightning
 	{
 		Player player = event.getPlayer();
 		ItemStack is = player.getItemInHand();
+		if(is == null||is.getType() == Material.AIR)
+			return;
 		ItemMeta im = is.getItemMeta();
 		List<String> lore = im.getLore();
+		if(lore == null){
+			return;
+		}
 		for(String arg:lore)
 		{
 			if(arg.endsWith("Lightning"))

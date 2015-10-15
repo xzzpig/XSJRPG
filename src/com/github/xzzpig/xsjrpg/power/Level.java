@@ -1,9 +1,13 @@
 package com.github.xzzpig.xsjrpg.power;
+import org.bukkit.Material;
 import org.bukkit.inventory.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.meta.*;
+
 import java.util.*;
+
 import com.github.xzzpig.BukkitTools.*;
+
 import org.bukkit.event.entity.*;
 
 public class Level
@@ -14,10 +18,15 @@ public class Level
 		{
 			return true;
 		}
+		if(is == null||is.getType() == Material.AIR)
+			return true;
 		int level = player.getLevel();
 		int limitlevel = 0;
 		ItemMeta im = is.getItemMeta();
 		List<String> lore = im.getLore();
+		if(lore == null){
+			return true;
+		}
 		for(String arg:lore)
 		{
 			if(arg.startsWith("Lv"))

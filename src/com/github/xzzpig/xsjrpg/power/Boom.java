@@ -1,6 +1,7 @@
 package com.github.xzzpig.xsjrpg.power;
 
 import java.util.*;
+
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
@@ -13,8 +14,13 @@ public class Boom
 	{
 		Player player = event.getPlayer();
 		ItemStack is = player.getItemInHand();
+		if(is == null||is.getType() == Material.AIR)
+			return;
 		ItemMeta im = is.getItemMeta();
 		List<String> lore = im.getLore();
+		if(lore == null){
+			return;
+		}
 		for(String arg:lore)
 		{
 			if(arg.equalsIgnoreCase("BOOM"))

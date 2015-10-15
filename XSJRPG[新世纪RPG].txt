@@ -57,15 +57,17 @@
 
 
 
-[指令类]指令类最大权限[xsjrpg.*]
+[指令类]指令类
+	最大权限[xsjrpg.*]
 
 	打开垃圾桶
-	/ljt
+	/xsj ljt
 	禁止丢弃物品
 
-禁止XX插件在XX世界加载
-/xsj BanPlugin lore[插件名字直接从放置插件的文件夹内读取] World[世界名字]
-xsjrpg.Plugin
+	禁止在XX世界使用XX命令
+	/xsj bancommand [world] [命令]
+	xsjrpg.command.bancommand
+	xsjrpg.admin.bancommand
 	修改手中武器名字
 	/xsj mz XXX[名字,支持颜色代码]
 	xsjrpg.command.mz
@@ -93,12 +95,14 @@ xsjrpg.Plugin
 /xsj lp xp XXXX[数值]或XXL[等级]  SSSS[玩家名字]
 xsjrpg.xp
 
-无视武器等级限制
-/xsj lp lv XXXX[玩家名字] XXXX[时间,单位小时]
-让某玩家在规定时间内无视武器等级限制
+	让某玩家在一定时间内有某些权限
+	/xsj temppremission [player] [premission] [time(min)]
+	无视武器等级限制
+	/xsj temppremission XXXX[玩家名字] xsjrpg.admin.level XXXX[时间,单位min]
+	让某玩家在规定时间内无视武器等级限制
 
 
-	让某玩家永久无视等级限制
+	让某玩家无视等级限制权限
 	xsjrpg.admin.level
 
 {分世界PvP开放}
@@ -136,14 +140,14 @@ tp结伴队友
 聊天框的名字不变
 
 {世界限制}
-/xsj x World[世界名字] XXXX[等级限制]
-xsjrpg.world
+	/xsj levellimit World[世界名字] XXXX[等级限制]
+	xsjrpg.admin.level
 
 
 	查看插件所有指令:
 	/xsj help
-查看所有有属性的lore:
-/xsj lore
+	查看所有有属性的lore:
+	/xsj lore list
 
 
 
@@ -166,8 +170,16 @@ premission:
       xsjrpg.default: true
       xsjrpg.command.*: true
       xsjrpg.admin.level: true
+      xsjrpg.admin.drop: true
+      xsjrpg.admin.bancommand: true
   xsjrpg.admin.level:
-    description: 忽视物品level限制
+    description: 忽视物品和世界level限制
+    default: op
+  xsjrpg.admin.drop:
+    description: 忽视物品禁止丢弃限制
+    default: op
+  xsjrpg.admin.bancommand:
+    description: 忽视禁止命令限制
     default: op
   xsjrpg.default:
     description: 新世纪RPG的基础权限(默认没有)
@@ -180,17 +192,20 @@ premission:
     children:
       xsjrpg.command.admin: true
   xsjrpg.command.admin:
-    description: 新世纪RPG的
+    description: 新世纪RPG的管理员命令权限
     default: op
     children:
-      xsjrpg.command.default:true
-      xsjrpg.command.mx: true
+      xsjrpg.command.default: true
+      xsjrpg.command.mz: true
       xsjrpg.command.lore: true
+      xsjrpg.command.bancommand: true
   xsjrpg.command.default:
-    description: 新世纪RPG的
+    description: 新世纪RPG的基础命令权限
     default: op
     children:
       xsjrpg.command.help: true
+      xsjrpg.command.ljt: true
+      xsjrpg.command.item: true
   xsjrpg.command.help:
     description: 新世纪RPG的help权限
     default: op
@@ -199,6 +214,21 @@ premission:
     default: op
   xsjrpg.command.lore:
     description: 修改物品lore权限
+    default: op
+  xsjrpg.command.ljt:
+    description: 打开垃圾桶权限
+    default: op
+  xsjrpg.command.item:
+    description: 保存&提取物品权限
+    default: op
+  xsjrpg.command.bancommand:
+    description: 使用禁止命令权限
+    default: op
+  xsjrpg.command.levellimit:
+    description: 使用levellimit命令权限
+    default: op
+  xsjrpg.command.temppremission:
+    description: 给玩家添加临时权限的权限
     default: op
   xsjrpg.type.*:
     description: 拥有所有type

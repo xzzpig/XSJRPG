@@ -4,6 +4,7 @@ import com.github.xzzpig.BukkitTools.*;
 
 import java.util.*;
 
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.*;
 import org.bukkit.inventory.*;
@@ -15,6 +16,8 @@ public class Armor
 	{
 		int armor = 0;
 		ItemStack[] iss = player.getInventory().getArmorContents();
+		if(iss == null)
+			return 0;
 		for(ItemStack is:iss)
 		{
 			armor = armor + getPreArmor(is);
@@ -26,9 +29,14 @@ public class Armor
 	
 	private static int getPreArmor(ItemStack is)
 	{
+		if(is == null||is.getType() == Material.AIR)
+			return 0;
 		ItemMeta im = is.getItemMeta();
 		List<String> lore = im.getLore();
 		int armor = 0;
+		if(lore == null){
+			return 0;
+		}
 		for(String arg:lore)
 		{
 			if(arg.endsWith("Armor"))

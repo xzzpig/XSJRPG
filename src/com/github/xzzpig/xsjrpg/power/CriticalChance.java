@@ -4,6 +4,7 @@ import com.github.xzzpig.BukkitTools.*;
 
 import java.util.*;
 
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.*;
 import org.bukkit.inventory.*;
@@ -18,11 +19,16 @@ public class CriticalChance
 			return;
 		Player player = (Player) event.getDamager();
 		ItemStack is = player.getItemInHand();
+		if(is == null||is.getType() == Material.AIR)
+			return;
 		ItemMeta im = is.getItemMeta();
 		List<String> lore = im.getLore();
 		int chance = 0;
 		int exdamage = 0;
 		int damage = (int) event.getDamage();
+		if(lore == null){
+			return;
+		}
 		for(String arg:lore)
 		{
 			if(arg.endsWith("CriticalDamage"))

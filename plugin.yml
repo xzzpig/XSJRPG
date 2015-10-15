@@ -20,12 +20,16 @@ premission:
       xsjrpg.default: true
       xsjrpg.command.*: true
       xsjrpg.admin.level: true
-      xsjrpg.afmin.drop: true
+      xsjrpg.admin.drop: true
+      xsjrpg.admin.bancommand: true
   xsjrpg.admin.level:
-    description: 忽视物品level限制
+    description: 忽视物品和世界level限制
     default: op
   xsjrpg.admin.drop:
     description: 忽视物品禁止丢弃限制
+    default: op
+  xsjrpg.admin.bancommand:
+    description: 忽视禁止命令限制
     default: op
   xsjrpg.default:
     description: 新世纪RPG的基础权限(默认没有)
@@ -38,14 +42,15 @@ premission:
     children:
       xsjrpg.command.admin: true
   xsjrpg.command.admin:
-    description: 新世纪RPG的
+    description: 新世纪RPG的管理员命令权限
     default: op
     children:
-      xsjrpg.command.default:true
-      xsjrpg.command.mx: true
+      xsjrpg.command.default: true
+      xsjrpg.command.mz: true
       xsjrpg.command.lore: true
+      xsjrpg.command.bancommand: true
   xsjrpg.command.default:
-    description: 新世纪RPG的
+    description: 新世纪RPG的基础命令权限
     default: op
     children:
       xsjrpg.command.help: true
@@ -65,6 +70,15 @@ premission:
     default: op
   xsjrpg.command.item:
     description: 保存&提取物品权限
+    default: op
+  xsjrpg.command.bancommand:
+    description: 使用禁止命令权限
+    default: op
+  xsjrpg.command.levellimit:
+    description: 使用levellimit命令权限
+    default: op
+  xsjrpg.command.temppremission:
+    description: 给玩家添加临时权限的权限
     default: op
   xsjrpg.type.*:
     description: 拥有所有type

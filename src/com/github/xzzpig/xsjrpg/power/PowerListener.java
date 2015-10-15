@@ -11,6 +11,14 @@ public class PowerListener implements Listener
 	@EventHandler
 	public void onPlayerDamage(EntityDamageByEntityEvent event)
 	{
+		if(event.getDamager().getType() ==EntityType.PLAYER)//防迭代
+		{
+			Player player = (Player) event.getDamager();
+			if(!DamageSpeed.on.containsKey(player.getName()))
+				DamageSpeed.on.put(player.getName(),false);
+			if(DamageSpeed.on.get(player.getName()))
+				return;
+		}
 		Level.onPlayerDamage(event);//满足等级
 		Class.onPlayerDamage(event);//满足职业
 		Evasion.run(event);
@@ -41,7 +49,7 @@ public class PowerListener implements Listener
 		{
 			return;
 		}
-		player.sendMessage(TString.Prefix("新世纪RPG",4)+"禁止丢弃物品，输入/ljt打开垃圾桶(箱子)以丢弃");
+		player.sendMessage(TString.Prefix("新世纪RPG",4)+"禁止丢弃物品，输入/xsj ljt打开垃圾桶(箱子)以丢弃");
 		event.setCancelled(true);
 	}
 }

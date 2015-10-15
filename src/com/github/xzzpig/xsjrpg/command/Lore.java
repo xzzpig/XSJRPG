@@ -23,8 +23,12 @@ public class Lore
 			return true;
 		}
 		ItemStack is = player.getItemInHand();
+		if(is == null)
+			is = new ItemStack(1);
 		ItemMeta im = is.getItemMeta();
 		List<String> lore = im.getLore();
+		if(lore == null)
+			lore = new ArrayList<String>();
 		if(Commands.getarg(args,1).equalsIgnoreCase("help"))
 		{
 			if(!sender.hasPermission("xsjrpg.command.help"))
@@ -41,19 +45,19 @@ public class Lore
 		{
 			sender.sendMessage(TString.Prefix("新世纪RPG",3)+"/xsj lore add [lore] <行数> -给物品添加lore");
 			sender.sendMessage(TString.Prefix("新世纪RPG",6)+"特殊lore列表：");
-			sender.sendMessage("$3+xxx% Damagex    -攻击力×xxx%[武器]");
-			sender.sendMessage("$3+xxx% Damages    -xxx%秒杀对象[武器]");
-			sender.sendMessage("$3+xxx-yyy Damage  -表示范围xxx~yyy的范围[武器]");
-			sender.sendMessage("$3+xxx Health      -额外增加xxx点生命[防具]");
-			sender.sendMessage("$3+xxx DamageSpeed -增加2点攻击速度[武器]");
-			sender.sendMessage("$3+xxx% Evasion    -增加玩家xxx%的闪避几率[武器|防具]");
-			sender.sendMessage("$3+xxx% CriticalChance +yyy CriticalDamage -xxx%的几率造成额外yyy点伤害[武器]");
-			sender.sendMessage("$3+xxx LifeSteal   -窃取xxx点生命[武器]");
-			sender.sendMessage("$3+xxx Armor       -减少xxx点伤害[武器|防具]");
-			sender.sendMessage("$3Lv xxx           -使用者至少xxx级才能使用[all]");
-			sender.sendMessage("$3Type:xxx         -拥有 xsjrpg.type.xxx 才能使用[all]");
-			sender.sendMessage("$3BOOM             -攻击带有爆炸<音效和效果>(攻击生物是生效)[all]");
-			sender.sendMessage("$3+XX% Lightning   -攻击XX几率带有闪电(攻击生物时生效)[all]");
+			sender.sendMessage("§3+xxx% Damagex    -攻击力×xxx%[武器]");
+			sender.sendMessage("§3+xxx% Damages    -xxx%秒杀对象[武器]");
+			sender.sendMessage("§3+xxx-yyy Damage  -表示范围xxx~yyy的范围[武器]");
+			sender.sendMessage("§3+xxx Health      -额外增加xxx点生命[防具]");
+			sender.sendMessage("§3+xxx DamageSpeed -增加2点攻击速度[武器]");
+			sender.sendMessage("§3+xxx% Evasion    -增加玩家xxx%的闪避几率[武器|防具]");
+			sender.sendMessage("§3+xxx% CriticalChance +yyy CriticalDamage -xxx%的几率造成额外yyy点伤害[武器]");
+			sender.sendMessage("§3+xxx LifeSteal   -窃取xxx点生命[武器]");
+			sender.sendMessage("§3+xxx Armor       -减少xxx点伤害[武器|防具]");
+			sender.sendMessage("§3Lv xxx           -使用者至少xxx级才能使用[all]");
+			sender.sendMessage("§3Type:xxx         -拥有 xsjrpg.type.xxx 才能使用[all]");
+			sender.sendMessage("§3BOOM             -攻击带有爆炸<音效和效果>(攻击生物是生效)[all]");
+			sender.sendMessage("§3+XX% Lightning   -攻击XX几率带有闪电(攻击生物时生效)[all]");
 			return true;
 		}
 		else if(Commands.getarg(args,1).equalsIgnoreCase("add"))
@@ -68,6 +72,8 @@ public class Lore
 			{
 				try
 				{
+					sender.sendMessage(args[2]);//TODO
+					sender.sendMessage(args[3]);
 					line = Integer.valueOf(args[3]);
 				}
 				catch (NumberFormatException e)
@@ -78,11 +84,16 @@ public class Lore
 			}
 			if(line == -1)
 			{
-				lore.add(args[2]);
+				lore.add(args[2].replaceAll("_", " ").replaceAll("&","§"));
 			}
 			else
 			{
-				lore.add(line,args[2]);
+				if(lore.size()<=0)
+				{
+					sender.sendMessage((TString.Prefix("新世纪RPG",4)+"lore行数应大于0"));
+					return true;
+				}
+				lore.add(line,args[2].replaceAll("_", " "));
 			}
 			im.setLore(lore);
 			is.setItemMeta(im);
@@ -109,7 +120,17 @@ public class Lore
 					return false;
 				}
 			}
-			lore.remove(line);
+			if(lore.size()<line)
+			{
+				sender.sendMessage((TString.Prefix("新世纪RPG",4)+"lore行数过大"));
+				return true;
+			}
+			if(lore.size()<=0)
+			{
+				sender.sendMessage((TString.Prefix("新世纪RPG",4)+"lore行数应大于0"));
+				return true;
+			}
+			lore.remove(line-1);
 			im.setLore(lore);
 			is.setItemMeta(im);
 			sender.sendMessage((TString.Prefix("新世纪RPG",4)+"lore已删除"));

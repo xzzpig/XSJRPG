@@ -1,7 +1,10 @@
 package com.github.xzzpig.xsjrpg.power;
 
 import com.github.xzzpig.BukkitTools.*;
+
 import java.util.*;
+
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.*;
 import org.bukkit.inventory.*;
@@ -15,9 +18,14 @@ public class Evasion
 			return;
 		Player player = (Player) event.getEntity();
 		ItemStack is = player.getItemInHand();
+		if(is == null||is.getType() == Material.AIR)
+			return;
 		ItemMeta im = is.getItemMeta();
 		List<String> lore = im.getLore();
 		int chance = 0;
+		if(lore == null){
+			return;
+		}
 		for(String arg:lore)
 		{
 			if(arg.endsWith("Evasion"))

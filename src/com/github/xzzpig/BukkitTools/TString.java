@@ -7,23 +7,23 @@ import org.bukkit.entity.Player;
 public class TString {
 	private TString(){}
 	public static String Prefix(String prefix){
-		return "��6["+prefix+"]��f";
+		return "§6["+prefix+"]§f";
 	}
 	
 	public static String Prefix(String prefix,int colorid){
-		return "��6["+prefix+"]"+Color(colorid);
+		return "§6["+prefix+"]"+Color(colorid);
 	}
 	
 	public static String Prefix(String prefix,String colorid){
-		return "��6["+prefix+"]"+Color(colorid);
+		return "§6["+prefix+"]"+Color(colorid);
 	}
 	
 	public static String Color(int colorid){
-		return "��"+colorid;
+		return "§"+colorid;
 	}
 	
 	public static String Color(String colorid){
-		return "��"+colorid;
+		return "§"+colorid;
 	}
 	
 	public static void Print(String message){
