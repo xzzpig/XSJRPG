@@ -36,7 +36,7 @@ public class Damage
 				try
 				{
 					f = Integer.valueOf(TString.sub(arg, "+", "-"));
-					e = Integer.valueOf(TString.sub(arg, "-", " "));
+					e = Integer.valueOf(TString.sub(arg, "-", " D"));
 				}
 				catch (NumberFormatException e1)
 				{
