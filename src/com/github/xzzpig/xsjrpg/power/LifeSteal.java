@@ -44,7 +44,7 @@ public class LifeSteal
 				int maxhealth =(int)((Damageable)player).getMaxHealth();
 				if(health > maxhealth)
 					health = maxhealth;
-				player.setHealth(health+amount);
+				player.setHealth(health);
 			}
 		}
 	}
