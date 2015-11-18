@@ -22,7 +22,7 @@ public class PowerListener implements Listener
 		Level.onPlayerDamage(event);//满足等级
 		Class.onPlayerDamage(event);//满足职业
 		Boom.run(event);//爆炸声
-		Evasion.run(event);
+		Evasion.run(event);//闪避
 		LifeSteal.run(event);//加血
 		Damages.run(event);//秒杀
 		Damage.run(event);//伤害
@@ -30,6 +30,7 @@ public class PowerListener implements Listener
 		DamageSpeed.run(event);//多次伤害
 		CriticalChance.run(event);//额外伤害
 		Armor.run(event);//减伤
+		LmmuneDamage.run(event);//最大伤害
 	}
 	
 	@EventHandler
@@ -37,13 +38,9 @@ public class PowerListener implements Listener
 	{
 		Health.freshHealth((Player)event.getWhoClicked());//血量
 	}
+	
 	@EventHandler
-	public void onLeftClick(PlayerInteractEntityEvent event)
-	{
-		
-	}
-	@EventHandler
-	public void on(PlayerDropItemEvent event)
+	public void onDrop(PlayerDropItemEvent event)
 	{
 		Player player = event.getPlayer();
 		if(player.hasPermission("xsjrpg.admin.drop"))
