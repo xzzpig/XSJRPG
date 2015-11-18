@@ -17,11 +17,17 @@ public class TConfig {
 			try {
 				file.createNewFile();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		config = YamlConfiguration.loadConfiguration(file);
 		return config;
+	}
+	public static void delConfigFile(String pl,String filename){
+		File file;
+		file = new File(Bukkit.getPluginManager().getPlugin(pl).getDataFolder().toString() + "/"+filename);
+		if (!file.exists())
+			return;
+		file.delete();
 	}
 	
 	public static Object getConfig(FileConfiguration configfile,String arg0){
@@ -34,6 +40,8 @@ public class TConfig {
 	public static String[] getConfigPath(String pl,String filename,String arg0){
 		FileConfiguration config = getConfigFile(pl, filename);
 		Set<String> key = config.getConfigurationSection(arg0).getKeys(false);
+		if(key == null)
+			return null;
 		return key.toArray(new String[0]);
 	}
 	
@@ -64,7 +72,6 @@ public class TConfig {
 		try {
 			configfile.save(file);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
