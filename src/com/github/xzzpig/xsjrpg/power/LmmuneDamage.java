@@ -7,6 +7,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
+import com.github.xzzpig.xsjrpg.*;
 
 public class LmmuneDamage
 {
@@ -61,8 +62,10 @@ public class LmmuneDamage
 		Player player = (Player) event.getEntity();
 		int damage =(int) event.getDamage();
 		int max = getMax(player);
-		if(damage>max)
+		if(damage>max&&max != 0){
 			damage = max;
-		event.setDamage(damage);
+			event.setDamage(damage);
+		}
+		Debuger.prints(""+damage);
 	}
 }
