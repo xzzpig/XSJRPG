@@ -21,6 +21,7 @@ public class PowerListener implements Listener
 		}
 		Level.onPlayerDamage(event);//满足等级
 		Class.onPlayerDamage(event);//满足职业
+		Boom.run(event);//爆炸声
 		Evasion.run(event);
 		LifeSteal.run(event);//加血
 		Damages.run(event);//秒杀
@@ -39,7 +40,7 @@ public class PowerListener implements Listener
 	@EventHandler
 	public void onLeftClick(PlayerInteractEntityEvent event)
 	{
-		Boom.run(event);//爆炸声
+		
 	}
 	@EventHandler
 	public void on(PlayerDropItemEvent event)
