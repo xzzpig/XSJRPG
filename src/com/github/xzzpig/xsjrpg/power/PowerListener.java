@@ -31,6 +31,7 @@ public class PowerListener implements Listener
 		CriticalChance.run(event);//额外伤害
 		Armor.run(event);//减伤
 		LmmuneDamage.run(event);//最大伤害
+		LmmuneElement.run(event);
 	}
 	
 	@EventHandler
