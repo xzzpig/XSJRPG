@@ -47,17 +47,21 @@ public class Class
 		}
 		return true;
 	}
-	
+
 	public static void onPlayerDamage(EntityDamageByEntityEvent event)
 	{
 		if(event.getDamager().getType() !=EntityType.PLAYER||event.isCancelled())
 			return;
 		Player player = (Player) event.getDamager();
 		ItemStack is = player.getItemInHand();
-		if(!canUse(player,is))
-		{
-			event.setCancelled(true);
-			player.sendMessage(TString.Prefix("新世纪RPG",4)+"由于type权限不足，你不能使用该物品");
-		}
+		ItemStack[] iss = player.getInventory().getArmorContents();
+		if(iss != null)
+			for(ItemStack is2:iss)
+				if(canUse(player,is2))
+					return;
+		if(canUse(player,is))
+			return;
+		event.setCancelled(true);
+		player.sendMessage(TString.Prefix("新世纪RPG",4)+"由于type权限不足，你不能使用该物品");
 	}
 }
