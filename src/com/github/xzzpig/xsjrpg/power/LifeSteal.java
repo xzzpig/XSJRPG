@@ -41,7 +41,7 @@ public class LifeSteal
 					return;
 				}
 				int health =(int)((LivingEntity)player).getHealth()+amount;
-				int maxhealth =((LivingEntity)player).getMaxHealth();
+				int maxhealth =(int)((LivingEntity)player).getMaxHealth();
 				if(health > maxhealth)
 					health = maxhealth;
 				player.setHealth(health+amount);
