@@ -40,11 +40,11 @@ public class LifeSteal
 					player.sendMessage(TString.Prefix("新世纪RPG",4)+"lore错误\nLifeSteal格式:+xxx LifeSteal");
 					return;
 				}
-				int health =(int)((Damageable)player).getHealth()+amount;
-				int maxhealth =(int)((Damageable)player).getMaxHealth();
+				int health =(int)((LivingEntity)player).getHealth()+amount;
+				int maxhealth =((LivingEntity)player).getMaxHealth();
 				if(health > maxhealth)
 					health = maxhealth;
-				player.setHealth(health);
+				player.setHealth(health+amount);
 			}
 		}
 	}

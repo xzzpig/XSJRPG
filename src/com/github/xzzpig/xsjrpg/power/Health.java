@@ -14,7 +14,7 @@ public class Health
 	public static void freshHealth(Player player)
 	{
 		int maxhealth = getExHealth(player)+20;
-		if(((Damageable)player).getMaxHealth() == maxhealth)
+		if(((LivingEntity)player).getMaxHealth() == maxhealth)
 			return;
 		player.setMaxHealth(maxhealth);
 		player.sendMessage(TString.Prefix("新世纪RPG",3)+"你的最大生命值已刷新");

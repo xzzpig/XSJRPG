@@ -1,19 +1,18 @@
 package com.github.xzzpig.xsjrpg.power;
 
 import java.util.*;
+
 import org.bukkit.*;
 import org.bukkit.entity.*;
-import org.bukkit.event.entity.*;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
 public class Boom
 {
-	public static void run(EntityDamageByEntityEvent event)
+	public static void run(PlayerInteractEntityEvent event)
 	{
-		if(event.getDamager().getType() !=EntityType.PLAYER||event.isCancelled())
-			return;
-		Player player = (Player) event.getDamager();
+		Player player = event.getPlayer();
 		ItemStack is = player.getItemInHand();
 		if(is == null||is.getType() == Material.AIR)
 			return;

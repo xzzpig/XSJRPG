@@ -152,6 +152,15 @@ public class Commands
 				p.addAttachment(Bukkit.getPluginManager().getPlugin("XSJRPG"),premission,true,time*20*60);
 				sender.sendMessage(TString.Prefix("新世纪RPG",4)+"已设置"+toplayer+"在"+time+"分钟内拥有权限"+premission);
 			}
+			else if(getarg(args,0).equalsIgnoreCase("ps"))
+			{
+				if(!sender.hasPermission("xsjrpg.command.ps"))
+				{
+					sender.sendMessage(TString.Prefix("新世纪RPG",4)+"你没有权限执行该命令");
+					return true;
+				}
+				return Ps.command(sender,cmd,label,args);
+			}
 		}
 		return false;
 	}
