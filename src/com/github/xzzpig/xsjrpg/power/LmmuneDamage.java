@@ -42,8 +42,6 @@ public class LmmuneDamage
 		{
 			if(arg.endsWith("lmmuneDamage"))
 			{
-				Debuger.prints("lmmuneDamage");
-				Debuger.prints("lore:"+arg);
 				try
 				{
 					max = Integer.valueOf(TString.sub(arg, "+", " l"));

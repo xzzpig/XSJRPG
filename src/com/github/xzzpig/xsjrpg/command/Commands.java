@@ -31,6 +31,7 @@ public class Commands
 				sender.sendMessage(TString.Prefix("新世纪RPG",2)+"/xsj levellimit [world] [level] -设置某世界最高等级");
 				sender.sendMessage(TString.Prefix("新世纪RPG",2)+"/xsj ljt -打开垃圾桶");
 				sender.sendMessage(TString.Prefix("新世纪RPG",2)+"/xsj temppremission [player] [权限] [时间] -设置某玩家在一点时间内有某权限(单位min)");
+				sender.sendMessage(TString.Prefix("新世纪RPG",2)+"/xsj ps -Ps命令");
 				return true;
 			}
 			else if(getarg(args,0).equalsIgnoreCase("mz"))
