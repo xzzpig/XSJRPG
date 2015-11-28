@@ -13,7 +13,10 @@ public class Ps
 	public static void run(EntityDeathEvent event)
 	{
 		LivingEntity killed = event.getEntity();
+		killed.getKiller();
 		Player killer = killed.getKiller();
+		if(killer == null)
+			return;
 		ItemStack is = killer.getItemInHand();
 		if(is == null||is.getType() == Material.AIR)
 			return;
