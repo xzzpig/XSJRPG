@@ -29,6 +29,7 @@ public class PowerListener implements Listener
 		DamageSpeed.run(event);//多次伤害
 		CriticalChance.run(event);//额外伤害
 		Armor.run(event);//减伤
+		Ps.run(event);
 	}
 	
 	@EventHandler
@@ -51,10 +52,5 @@ public class PowerListener implements Listener
 		}
 		player.sendMessage(TString.Prefix("新世纪RPG",4)+"禁止丢弃物品，输入/xsj ljt打开垃圾桶(箱子)以丢弃");
 		event.setCancelled(true);
-	}
-	@EventHandler
-	public void onKilled(EntityDeathEvent event)
-	{
-		Ps.run(event);
 	}
 }
