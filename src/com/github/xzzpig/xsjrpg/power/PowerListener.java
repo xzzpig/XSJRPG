@@ -1,16 +1,18 @@
 package com.github.xzzpig.xsjrpg.power;
+import com.github.xzzpig.BukkitTools.*;
+import com.github.xzzpig.xsjrpg.*;
+import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.*;
-import org.bukkit.event.player.*;
 import org.bukkit.event.inventory.*;
-import org.bukkit.entity.*;
-import com.github.xzzpig.BukkitTools.*;
+import org.bukkit.event.player.*;
 
 public class PowerListener implements Listener
 {
 	@EventHandler
 	public void onPlayerDamage(EntityDamageByEntityEvent event)
 	{
+		long time = System.nanoTime();
 		if(event.getDamager().getType() ==EntityType.PLAYER)//防迭代
 		{
 			Player player = (Player) event.getDamager();
@@ -30,17 +32,14 @@ public class PowerListener implements Listener
 		CriticalChance.run(event);//额外伤害
 		Armor.run(event);//减伤
 		Ps.run(event);
+		Boom.run(event);//爆炸声
+		Debuger.prints(""+(System.nanoTime()-time));
 	}
 	
 	@EventHandler
 	public void onEquip(InventoryClickEvent event)
 	{
 		Health.freshHealth((Player)event.getWhoClicked());//血量
-	}
-	@EventHandler
-	public void onLeftClick(PlayerInteractEntityEvent event)
-	{
-		Boom.run(event);//爆炸声
 	}
 	@EventHandler
 	public void onDropItem(PlayerDropItemEvent event)

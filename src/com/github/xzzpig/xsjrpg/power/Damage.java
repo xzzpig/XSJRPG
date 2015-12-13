@@ -17,7 +17,7 @@ public class Damage
 		if(event.getDamager().getType() !=EntityType.PLAYER||event.isCancelled())
 			return;
 		Player player = (Player) event.getDamager();
-		int damage = (int)event.getDamage();
+		int damage =(int) event.getDamage();
 		ItemStack is = player.getItemInHand();
 		if(is == null||is.getType() == Material.AIR)
 			return;

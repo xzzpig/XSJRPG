@@ -13,7 +13,6 @@ public class LmmuneDamage
 {
 	public static int getMax(Player player)
 	{
-		Debuger.prints("getMax()");
 		int max = 0;
 		ItemStack[] iss = player.getInventory().getArmorContents();
 		if(iss == null)
@@ -29,7 +28,6 @@ public class LmmuneDamage
 
 	private static int getPreMax(ItemStack is)
 	{
-		Debuger.prints("getPreMax");
 		if(is == null||is.getType() == Material.AIR)
 			return 0;
 		ItemMeta im = is.getItemMeta();
@@ -48,7 +46,6 @@ public class LmmuneDamage
 				}
 				catch (NumberFormatException e)
 				{
-					Debuger.prints("int error");
 					return 0;
 				}
 				return max;
@@ -69,6 +66,6 @@ public class LmmuneDamage
 			damage = max;
 			event.setDamage(damage);
 		}
-		Debuger.prints(max+"|"+damage);
+		Debuger.prints(""+damage);
 	}
 }

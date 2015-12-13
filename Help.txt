@@ -47,7 +47,6 @@
 	给玩家添加这个权限， 那么他就可以用了。
 	xjsrpg.type.ZhanShi
 
-{特殊效果Lore}
 	攻击带有爆炸<音效和效果>
 	BOOM
 	攻击XX几率带有闪电<音效>
@@ -86,58 +85,13 @@
 	提取这武器到背包
 	/xsj item get [uid]
 	xsjrpg.lore
-{等级监控}
-
-意外掉级
-/xsj lp back
-
-添加玩家等级[Ess插件添加的话不会被记录,上次试过了]
-/xsj lp xp XXXX[数值]或XXL[等级]  SSSS[玩家名字]
-xsjrpg.xp
 
 	让某玩家在一定时间内有某些权限
 	/xsj temppremission [player] [premission] [time(min)]
 	无视武器等级限制
-	/xsj temppremission XXXX[玩家名字] xsjrpg.admin.level XXXX[时间,单位min]
-	让某玩家在规定时间内无视武器等级限制
-
 
 	让某玩家无视等级限制权限
 	xsjrpg.admin.level
-
-{分世界PvP开放}
-
-禁止/开启pvp(指令使用后提示<世界名字 PVP t>/<世界名字 PVP f>颜色白色,OP可见,禁止时玩家互相攻击会提示<PVP NO>颜色红色,玩家自己可见)
-/xsj PvP World[世界名字] F/T[关闭/开启]
-xsjrpg.PvP
-
-某区块PVP开启[木铲子]
-/xsj PvP QK[某区块(木铲子左右键范围)] F/T[关闭/开启]
-xsjrpg.PvP
-
-{结伴系统}(结伴以后不能解除，且,只能结伴一次)
-结伴
-/j XXXX[玩家名字]
-xsjrpg.j
-
-同意/不同意结伴
-/j y/n
-
-tp结伴队友
-/jtp
-
-同意tp或不同意tp
-/jtp y/n
-
-查看已结伴玩家
-/j list
-
-1.结伴玩家双方攻击力增加10%
-2.结伴玩家双方血量加成增加50%
-3.玩家头顶上的名字变为:
-比如结伴玩家是1,同意结伴玩家是2
-那么1玩家头顶的名字变为2&1
-聊天框的名字不变
 
 {世界限制}
 	/xsj levellimit World[世界名字] XXXX[等级限制]
@@ -151,10 +105,15 @@ tp结伴队友
 
 
 
-V0.1的Type限制在防具装备栏没有写入检测
+V0.2计划：
+Lore：
+"+100 lmmuneDamage" 
+受到的攻击不超过100
+
+"lmmuneElement"
+免疫元素<即(不会中毒、减速、火焰附加、凋零(仅四种))>
 
 <PS系统>
-变量
 <n>：便于设置以及绑定的序列号
 <t>：设置的内容
 <t&>：设置的内容允许使用颜色代码
@@ -169,35 +128,30 @@ V0.1的Type限制在防具装备栏没有写入检测
 设置一个杀敌后的自定义喊话
 (比如：类似于MC里面的XXX使用YYY杀掉了SSS）
 (区别：这里的杀敌效果是自定义的)
-(例子1:&d玩家<SY>大喊：德玛西亚！使用顶级钻石剑杀死了敌人(这里的<SY>暂时定为litte_A))
+(例子1:&d玩家<Killer>大喊：德玛西亚！使用顶级钻石剑杀死了敌人(这里的<SY>暂时定为litte_A))
 (例子1效果(聊天框)：玩家litte_A大喊：德玛西亚！使用顶级钻石剑杀死了敌人(内容为粉色))
-/xsj lore ps <n> <t&>
 
 那么如何绑定这个内容进武器呢？
 在lore上写入
-"PS[<n>]"
+"Ps:test"
+
 那么这个武器在击杀敌人后将会在聊天框触发效果
 
+创建一个PS
+/xsj ps create <n> <t&>
+
 那么想要删掉这个序列号以及内容的指令呢？
-/xsj lore psremove <n>
+/xsj ps remove <n>
 
 想要查看设置的lore要怎么做?
-/xsj lore pslist
+/xsj ps list
 使用后聊天框：
 <n>：<t&>
+
 
 关于权限：
 [指令权限:OP设定]
 [自定义的喊话:所有人可见]
-
-
-后续补充：
-垃圾桶也有拒绝的东西
-贵重物品lore（禁止丢入垃圾桶）
-ljtoff
-
-垃圾桶所需要的补丁
-在使用合成台方块或背包的合成面板或npcmod的木匠工作台时，这些面板里面如果有东西就禁止关闭
 
 
 <spawn判定系统>
@@ -207,8 +161,8 @@ ljtoff
 
 低于或者高于范围就在原ess设定的坐标出生
   
-如果有 31-50这种类型的则优先于ess的原设定
-如果有 15-45这种类型的则无法设定spawn
+如果有 31-50这种类型的则优先于ess的原设定 （也就是检测后面还有没有主城点）
+如果有 15-45这种类型的则无法设定spawn （也就是重复）
 
 删除名为A的回城坐标
 /xsj despawn A
@@ -254,9 +208,19 @@ T键聊天框提示修改
 自定义提示指令：
 /xsj ur t ［V］
 
+V0.1补丁
 
+垃圾桶也有拒绝的东西
+贵重物品lore（禁止丢入垃圾桶）
+ljtoff
 
+垃圾桶所需要的补丁
+在使用合成台方块或背包的合成面板时，这些面板里面如果有东西关闭后自动捡回背包
 
+Type限制在防具装备栏没有写入检测
+
+V0.2补丁
+class.java和lmmuneDamage.java文件出问题
 
 
 
@@ -343,3 +307,4 @@ premission:
   xsjrpg.type.*:
     description: 拥有所有type
     default: op
+
